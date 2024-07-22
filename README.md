@@ -17,32 +17,32 @@ Jimmy's POS Dashboard provides a sleek, user-friendly interface for managing sal
 
 To get started with Jimmy's POS Dashboard, clone the repo and install the dependencies:
 
-\`\`\`bash
+```
 git clone https://github.com/Lamboserker/Jimmys_POS_Desktop.git
 cd Jimmys_POS_Desktop
 npm install
-\`\`\`
+```
 
 ## Usage
 
 Run the following commands to start the development server:
 
-\`\`\`bash
+```
 npm run dev
-\`\`\`
+```
 
 To build the project for production, use:
 
-\`\`\`bash
+```
 npm run build
-\`\`\`
+```
 
 You can also lint the project or analyze the build using:
 
-\`\`\`bash
+```
 npm run lint
 npm run analyze
-\`\`\`
+```
 
 ## Dependencies
 
