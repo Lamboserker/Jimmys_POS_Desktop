@@ -17,7 +17,58 @@ Jimmy's POS Dashboard provides a sleek, user-friendly interface for managing sal
 
 To get started with Jimmy's POS Dashboard, clone the repo and install the dependencies:
 
-```bash
+\`\`\`bash
 git clone https://github.com/Lamboserker/Jimmys_POS_Desktop.git
 cd Jimmys_POS_Desktop
 npm install
+\`\`\`
+
+## Usage
+
+Run the following commands to start the development server:
+
+\`\`\`bash
+npm run dev
+\`\`\`
+
+To build the project for production, use:
+
+\`\`\`bash
+npm run build
+\`\`\`
+
+You can also lint the project or analyze the build using:
+
+\`\`\`bash
+npm run lint
+npm run analyze
+\`\`\`
+
+## Dependencies
+
+- React (`react`, `react-dom`)
+- Material-UI (`@mui/*`)
+- Emotion (`@emotion/react`, `@emotion/styled`)
+- Routing (`react-router-dom`)
+- Axios for API requests
+- Day.js and date-fns for date manipulation
+
+## Development Dependencies
+
+- Vite for building and serving the app
+- Babel and ESLint for code transpilation and linting
+- TailwindCSS for utility-first CSS management
+
+## Contributing
+
+Contributions are always welcome! Please read the contributing guidelines first.
+
+## License
+
+This project is privately maintained by Lukas Lamberz. All rights reserved.
+
+## Author
+
+Lukas Lamberz
+
+Feel free to contact me or submit an issue if you have any questions or need further assistance.
