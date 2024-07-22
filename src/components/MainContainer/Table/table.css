@@ -1,0 +1,16 @@
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .MuiTableContainer-root, .MuiTableContainer-root * {
+    visibility: visible;
+  }
+  .MuiTableContainer-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
