@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -17,17 +17,4 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Add custom utility classes or component styles if needed */
 
-/* Example of custom class */
-.custom-button {
-  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
-}
-
-/* Optimize for dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #121212;
-  }
-}

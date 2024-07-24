@@ -94,16 +94,19 @@ const Dashboard = () => {
   }, [apiUrl, startDate, endDate, selectedItems]);
 
   useEffect(() => {
-    if (searchReady) {
-      fetchInitialData();
+    if ((startDate && endDate) || (!startDate && !endDate)) {
+      if (searchReady) {
+        fetchInitialData();
+      }
     } else {
       setAlert({
         open: true,
         severity: "warning",
-        message: "Unvollständige Eingabe.",
+        message:
+          "Unvollständige Eingabe. Bitte wählen Sie sowohl Start- als auch Enddatum.",
       });
     }
-  }, [searchReady, fetchInitialData]);
+  }, [searchReady, startDate, endDate, fetchInitialData]);
 
   const handleDateChange = useCallback(
     (date, type) => {
@@ -132,7 +135,7 @@ const Dashboard = () => {
   }, [alert]);
 
   return (
-    <div>
+    <div className="max-w-screen  overflow-hidden">
       <TopBar
         onDateChange={handleDateChange}
         onItemsSelected={handleItemsSelected}

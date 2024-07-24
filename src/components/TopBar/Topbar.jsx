@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     alignItems: "center",
     height: "64px",
+    padding: "20px",
   },
   topBarItem: {
     display: "flex",

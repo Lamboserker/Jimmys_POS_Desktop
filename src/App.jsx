@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline"; 
+import CssBaseline from "@mui/material/CssBaseline";
 import LoadingPage from "./Loading/Loading";
 
 // Lazy load the components
