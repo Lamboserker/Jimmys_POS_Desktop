@@ -19,7 +19,7 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    "jsx-a11y/no-autofocus": "warn", // Warnung für Autofocus zur besseren Barrierefreiheit
-    "prettier/prettier": "warn", // Prettier-Regel zur Sicherstellung der Codeformatierung
+    "jsx-a11y/no-autofocus": "warn", 
+    "prettier/prettier": "warn", 
   },
 };

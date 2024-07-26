@@ -8,7 +8,7 @@ import viteCompression from "vite-plugin-compression";
 export default defineConfig({
   plugins: [
     react(),
-    viteCompression({ algorithm: "brotliCompress" }), // Brotli-Komprimierung
+    viteCompression({ algorithm: "brotliCompress" }), 
   ],
   css: {
     postcss: {

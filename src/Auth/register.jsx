@@ -28,7 +28,6 @@ const Register = () => {
       localStorage.setItem("token", response.data.token);
 
       // Erfolgreiche Registrierung bestätigen
-      console.log("Registrierung erfolgreich:", response.data);
 
       navigate("/login"); // Hier leitest du den Benutzer zur Anmeldeseite um
     } catch (error) {
