@@ -16,7 +16,7 @@
     "productName": "JimmysPOS",
     "directories": {
       "buildResources": "assets"
-    },
+    }
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
