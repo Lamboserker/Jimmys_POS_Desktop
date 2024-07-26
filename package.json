@@ -11,13 +11,6 @@
     "preview": "vite preview",
     "analyze": "vite build --report"
   },
-  "build": {
-    "appId": "com.jimmyspos.app",
-    "productName": "JimmysPOS",
-    "directories": {
-      "buildResources": "assets"
-    }
-  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -47,7 +40,6 @@
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.19",
-    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -55,7 +47,6 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "vite": "^5.2.0",
-    "wait-on": "^7.2.0"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
