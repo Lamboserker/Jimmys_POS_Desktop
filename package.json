@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "Its the Dashboard of Jimmys_POS",
   "author": "Lukas Lamberz",
-  "main": "main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -18,11 +17,6 @@
     "directories": {
       "buildResources": "assets"
     },
-    "files": [
-      "dist/**/*",
-      "main.js",
-      "preload.js"
-    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
