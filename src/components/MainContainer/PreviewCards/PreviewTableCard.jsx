@@ -1,50 +1,83 @@
-import { Card, CardContent, Typography } from "@mui/material";
-import axios from "axios";
+import {
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  Dialog,
+  Button,
+} from "@mui/material";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import PrintIcon from "@mui/icons-material/Print";
 import PropTypes from "prop-types";
-import Table from "../Table/Table"; // Hier importiere ich die Table-Komponente, die eigentlich CollapsibleTable ist
+import Table from "../Table/Table";
+import "../Table/table.css";
+import { useState } from "react";
 
 const PreviewTableCard = ({ salesData, setSalesData, selectedItems }) => {
-  const handleDelete = async (id) => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    try {
-      await axios.delete(
-        `${apiUrl}/sales/${id}`,
+  const [open, setOpen] = useState(false);
 
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      // Aktualisiere die salesData nach dem Löschen
-      setSalesData((prevData) => prevData.filter((sale) => sale._id !== id));
-    } catch (error) {
-      console.error("Fehler beim Löschen des Verkaufs:", error);
-    }
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handlePrint = () => {
+    window.print();
   };
 
   return (
-    <Card className="h-full overflow-x-auto">
-      <CardContent>
-        <Typography variant="h5" component="div" gutterBottom>
-          Detaillierte Verkaufsübersicht
-        </Typography>
-        <Table
-          selectedItems={selectedItems}
-          salesData={salesData}
-          setSalesData={setSalesData} // Added setSalesData prop
-          onDelete={handleDelete} // Hier wird die handleDelete-Funktion als Prop übergeben
-        />
-      </CardContent>
-    </Card>
+    <>
+      <Card className="previewTableCard">
+        <CardContent>
+          <Typography variant="h5" component="div" gutterBottom>
+            Detaillierte Verkaufsübersicht
+            <IconButton onClick={handleOpen} style={{ float: "right" }}>
+              <FullscreenIcon />
+            </IconButton>
+          </Typography>
+          <Table
+            selectedItems={selectedItems}
+            salesData={salesData}
+            setSalesData={setSalesData}
+            onDelete={() => {}}
+          />
+        </CardContent>
+      </Card>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="full-screen-table"
+      >
+        <CardContent>
+          <Typography variant="h5" component="div" gutterBottom>
+            Detaillierte Verkaufsübersicht
+            <IconButton onClick={handleClose} style={{ float: "right" }}>
+              <FullscreenIcon />
+            </IconButton>
+          </Typography>
+          <Button
+            startIcon={<PrintIcon />}
+            onClick={handlePrint}
+            sx={{ margin: 2 }}
+            className="no-print"
+          >
+            Drucken
+          </Button>
+          <Table
+            selectedItems={selectedItems}
+            salesData={salesData}
+            setSalesData={setSalesData}
+            onDelete={() => {}}
+          />
+        </CardContent>
+      </Dialog>
+    </>
   );
 };
 
 PreviewTableCard.propTypes = {
   salesData: PropTypes.array.isRequired,
-  selectedItems: PropTypes.array.isRequired, // Changed to array
-  setSalesData: PropTypes.func.isRequired, // Added setSalesData prop
+  selectedItems: PropTypes.array.isRequired,
+  setSalesData: PropTypes.func.isRequired,
 };
 
 export default PreviewTableCard;

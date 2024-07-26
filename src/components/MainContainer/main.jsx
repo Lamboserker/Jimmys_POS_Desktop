@@ -2,15 +2,18 @@ import React, { memo, useMemo } from "react";
 import { Grid, Container, Box } from "@mui/material";
 import PreviewTableCard from "./PreviewCards/PreviewTableCard";
 import PreviewSeriesCard from "./PreviewCards/PreviewSeriesCard";
-import ActionButtonsCard from "./PreviewCards/ActionButtonsCard";
-import PreviewPie from "./PreviewCards/PreviewPie";
+import PreviewPie from "./PreviewCards/PreviewPieCard";
 import PropTypes from "prop-types";
+import PreviewUserSalesPieCard from "./PreviewCards/PreviewUserSalesCard";
 
 const MainContainer = ({
   salesData = [],
   setSalesData,
   selectedItems = [],
   totalSales = 0,
+  selectedUsers = [],
+  startDate,
+  endDate,
 }) => {
   const memoizedSalesData = useMemo(() => salesData, [salesData]);
   const memoizedSelectedItems = useMemo(() => selectedItems, [selectedItems]);
@@ -45,7 +48,11 @@ const MainContainer = ({
             />
           </Grid>
           <Grid item xs={12}>
-            <ActionButtonsCard />
+            <PreviewUserSalesPieCard
+              selectedUsers={selectedUsers}
+              startDate={startDate}
+              endDate={endDate}
+            />
           </Grid>
           <Grid item xs={12}>
             <PreviewPie totalSales={memoizedTotalSales} />
@@ -61,6 +68,9 @@ MainContainer.propTypes = {
   setSalesData: PropTypes.func.isRequired,
   selectedItems: PropTypes.array.isRequired,
   totalSales: PropTypes.number.isRequired,
+  selectedUsers: PropTypes.array,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
 };
 
 export default memo(MainContainer);

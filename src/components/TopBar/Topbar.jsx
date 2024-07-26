@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -7,6 +7,7 @@ import ComboBox from "./Searchbar/SearchBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "../Sidebar/Sidebar";
 import PropTypes from "prop-types";
+import UserDropdown from "./UserDropdown/UserDropdown"; // Import der neuen Komponente
 
 const useStyles = makeStyles({
   topBar: {
@@ -39,12 +40,11 @@ const useStyles = makeStyles({
   },
 });
 
-const TopBar = ({ onDateChange, onItemsSelected }) => {
+const TopBar = ({ onDateChange, onItemsSelected, onUsersSelected }) => {
   const classes = useStyles();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const openSidebar = () => {
-    console.log("open sidebar", sidebarOpen);
     setSidebarOpen(true);
   };
 
@@ -78,6 +78,10 @@ const TopBar = ({ onDateChange, onItemsSelected }) => {
       <Box className={classes.topBarItem} sx={{ height: "100%" }}>
         <DatePickers onDateChange={handleDateChange} />
       </Box>
+      <Box className={classes.topBarItem} sx={{ height: "100%" }}>
+        <UserDropdown onUsersSelected={onUsersSelected} />{" "}
+        {/* Nutzung der neuen Komponente */}
+      </Box>
       <Box
         className={`${classes.topBarItem} ${classes.searchBar}`}
         sx={{ height: "100%" }}
@@ -92,6 +96,7 @@ const TopBar = ({ onDateChange, onItemsSelected }) => {
 TopBar.propTypes = {
   onDateChange: PropTypes.func.isRequired,
   onItemsSelected: PropTypes.func.isRequired,
+  onUsersSelected: PropTypes.func.isRequired,
 };
 
 export default TopBar;

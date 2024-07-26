@@ -14,3 +14,27 @@
     display: none !important;
   }
 }
+
+.previewTableCard .fullsize-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.modal-style {
+  position: 'absolute';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+  width: '90%';
+  height: '90%';
+  background-color: 'background.paper';
+  box-shadow: 24;
+  padding: 4;
+}
+
+.print-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}

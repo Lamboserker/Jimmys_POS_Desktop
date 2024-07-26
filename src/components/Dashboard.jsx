@@ -20,6 +20,7 @@ const Dashboard = () => {
     severity: "",
     message: "",
   });
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const { selectedItems, setSelectedItems } = useContext(ItemContext);
   const { startDate, setStartDate, endDate, setEndDate } =
@@ -53,8 +54,10 @@ const Dashboard = () => {
       const response = await axios.post(
         `${apiUrl}/sales/search`,
         {
-          startDate: startDate || defaultStart,
-          endDate: endDate || new Date(),
+          startDate: startDate
+            ? dayjs(startDate).format()
+            : dayjs(defaultStart).format(),
+          endDate: endDate ? dayjs(endDate).format() : dayjs().format(),
           items: selectedItems,
         },
         axiosConfig
@@ -93,6 +96,56 @@ const Dashboard = () => {
     }
   }, [apiUrl, startDate, endDate, selectedItems]);
 
+  const fetchSalesByUsers = useCallback(async () => {
+    if (!selectedUsers.length) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await axios.post(
+        `${apiUrl}/sales/filter-by-users`,
+        {
+          userIds: selectedUsers,
+          startDate: startDate ? dayjs(startDate).format() : undefined,
+          endDate: endDate ? dayjs(endDate).format() : undefined,
+        },
+        axiosConfig
+      );
+
+      const sanitizedData = response.data.map((sale) => ({
+        ...sale,
+        price: sale.price ?? 0,
+      }));
+
+      if (sanitizedData.length === 0) {
+        setAlert({
+          open: true,
+          severity: "warning",
+          message:
+            "Keine Verkäufe für die ausgewählten Benutzer im angegebenen Zeitraum gefunden.",
+        });
+      }
+
+      setSalesData(sanitizedData);
+      setTotalSales(
+        sanitizedData.reduce((acc, curr) => acc + (curr.quantity || 0), 0)
+      );
+    } catch (error) {
+      console.error("Error fetching sales by users:", error);
+      setAlert({
+        open: true,
+        severity: "error",
+        message: "Fehler beim Abrufen der Verkäufe nach Benutzern.",
+      });
+    }
+  }, [apiUrl, selectedUsers, startDate, endDate]);
+
   useEffect(() => {
     if ((startDate && endDate) || (!startDate && !endDate)) {
       if (searchReady) {
@@ -107,6 +160,10 @@ const Dashboard = () => {
       });
     }
   }, [searchReady, startDate, endDate, fetchInitialData]);
+
+  useEffect(() => {
+    fetchSalesByUsers();
+  }, [fetchSalesByUsers]);
 
   const handleDateChange = useCallback(
     (date, type) => {
@@ -126,6 +183,10 @@ const Dashboard = () => {
     [setSelectedItems]
   );
 
+  const handleUsersSelected = useCallback((userIds) => {
+    setSelectedUsers(userIds);
+  }, []);
+
   const handleTodayClick = useCallback(() => {
     setEndDate(new Date());
   }, [setEndDate]);
@@ -139,13 +200,16 @@ const Dashboard = () => {
       <TopBar
         onDateChange={handleDateChange}
         onItemsSelected={handleItemsSelected}
-        onTodayClick={handleTodayClick}
+        onUsersSelected={handleUsersSelected}
       />
       <MainContainer
         salesData={salesData}
         setSalesData={setSalesData}
         selectedItems={selectedItems}
         totalSales={totalSales}
+        selectedUsers={selectedUsers}
+        startDate={startDate ? dayjs(startDate).format() : undefined}
+        endDate={endDate ? dayjs(endDate).format() : undefined}
       />
       <Snackbar
         open={alert.open}

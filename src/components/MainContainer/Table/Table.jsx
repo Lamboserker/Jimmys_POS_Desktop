@@ -14,17 +14,16 @@ import {
   Typography,
   Paper,
   TablePagination,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
-import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PrintIcon from "@mui/icons-material/Print";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import "./table.css";
 
 const createData = (id, date, product, amount, userName) => ({
@@ -84,7 +83,7 @@ const Row = ({ row, onDelete }) => {
       case "Pfand":
         return "Pfand";
       default:
-        return "Unbekannter Typ"; // Fallback for unexpected types
+        return "Unbekannter Typ";
     }
   }, []);
 
@@ -213,10 +212,6 @@ Row.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-const handlePrint = () => {
-  window.print();
-};
-
 const CollapsibleTable = ({ salesData, onDelete }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -224,16 +219,16 @@ const CollapsibleTable = ({ salesData, onDelete }) => {
 
   useEffect(() => {
     const fetchUsernames = async () => {
-      const apiUrl = import.meta.env.VITE_API_URL; // Stellen Sie sicher, dass diese Variable korrekt gesetzt ist
+      const apiUrl = import.meta.env.VITE_API_URL;
       const userIds = salesData.map((sale) => sale.user);
-      const uniqueUserIds = [...new Set(userIds)]; // Entfernt Duplikate
+      const uniqueUserIds = [...new Set(userIds)];
       const response = await axios.post(`${apiUrl}/users/usernames`, {
         userIds: uniqueUserIds,
       });
       const usernames = response.data;
 
       const usernameMap = usernames.reduce((acc, user) => {
-        acc[user.id] = user.name; // Stellen Sie sicher, dass `user.id` und `user.name` die richtigen Schlüssel sind
+        acc[user.id] = user.name;
         return acc;
       }, {});
 
@@ -267,14 +262,6 @@ const CollapsibleTable = ({ salesData, onDelete }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Button
-        startIcon={<PrintIcon />}
-        onClick={handlePrint}
-        sx={{ margin: 2 }}
-        className="no-print"
-      >
-        Drucken
-      </Button>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>

@@ -25,7 +25,7 @@ const PreviewSeriesCard = ({ salesData }) => {
     <Card sx={{ height: "100%" }}>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
-          Series Preview
+          Aufteilung der Verkäufe
         </Typography>
         <div
           style={{
@@ -38,7 +38,6 @@ const PreviewSeriesCard = ({ salesData }) => {
             <Fullscreen />
           </IconButton>
           <SyncHighlight salesData={salesData} />
-          {console.log("salesData:", salesData)}
         </div>
         <Modal
           open={open}

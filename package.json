@@ -10,9 +10,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "analyze": "vite build --report",
-    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:build": "vite build && electron-builder"
+    "analyze": "vite build --report"
   },
   "build": {
     "appId": "com.jimmyspos.app",
@@ -24,11 +22,7 @@
       "dist/**/*",
       "main.js",
       "preload.js"
-    ],
-    "win": {
-      "target": "nsis",
-      "icon": "assets/icon.ico"
-    }
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -60,8 +54,6 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
-    "electron": "^31.2.1",
-    "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
